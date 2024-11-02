@@ -22,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private bool _isGrounded;
 
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer _sr;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -39,6 +42,18 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal");
         _rb.velocity = new Vector2(moveX * _speed, _rb.velocity.y);
+        if (moveX != 0 && moveX < 0)
+        {
+
+            animator.Play("Running");
+            _sr.flipX = true;
+        }
+        else if ((moveX != 0 && moveX > 0))
+        {
+            animator.Play("Running");
+            _sr.flipX = false;
+        }
+        else animator.Play("Idle");
     }
 
     private void Jump()

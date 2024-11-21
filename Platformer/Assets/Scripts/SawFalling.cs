@@ -15,24 +15,6 @@ public class SawFalling : MonoBehaviour
     }
 
 
-    //    var RigidbodyConstraints2D originalConstraints;
-
-    //private void Awake()
-    //    {
-    //        originalConstraints = rigidbody.constraints;
-    //    }
-
-    //    private void FreezeConstraints()
-    //    {
-    //        rigidbody.constraints = RigidbodyConstraints.FreezePositionY;
-    //    }
-
-    //    private void UnFreezeConstraints()
-    //    {
-    //        rigidbody.constraints = originalConstraints;
-    //    }
-
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

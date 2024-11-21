@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         Jump();
-        //CheckGround();
+        CheckGround();
     }
 
 
@@ -58,26 +58,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(_jumpKey))
+        if (Input.GetKeyDown(_jumpKey) & _isGrounded)
         { 
         _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
         }
     }
-    //private void CheckGround()
-    //{
-    //    _isGrounded = Physics2D.OverlapCircle(groundCheck.position, overlapRadius, groundLayerMask);
-    //    Debug.Log($"_isGround: {_isGrounded}");
-    //}
+    private void CheckGround()
+    {
+        _isGrounded = Physics2D.OverlapCircle(groundCheck.position, overlapRadius, groundLayerMask);
+        Debug.Log($"_isGround: {_isGrounded}");
+    }
 
 
-    //private void IsTouchingLeftWall()
-    //{
-    //    _isTouchingLeftWall = Physics2D.OverlapCircle(leftWallCheck.position, overlapRadius, groundLayerMask);
+    private void IsTouchingLeftWall()
+    {
+        _isTouchingLeftWall = Physics2D.OverlapCircle(leftWallCheck.position, overlapRadius, groundLayerMask);
 
-    //}
-    //private void IsTouchingRightWall()
-    //{
-    //    _isTouchingRightWall = Physics2D.OverlapCircle(rightWallCheck.position, overlapRadius, groundLayerMask);
+    }
+    private void IsTouchingRightWall()
+    {
+        _isTouchingRightWall = Physics2D.OverlapCircle(rightWallCheck.position, overlapRadius, groundLayerMask);
 
-    //}
+    }
 }

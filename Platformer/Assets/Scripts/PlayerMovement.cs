@@ -35,20 +35,24 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Jump();
         CheckGround();
+        //Debug.Log($"LeftWall: {_isTouchingLeftWall}");
+        //Debug.Log($"RightWall: {_isTouchingRightWall}");
     }
 
 
     private void Move()
     {
         float moveX = Input.GetAxis("Horizontal");
-        _rb.velocity = new Vector2(moveX * _speed, _rb.velocity.y);
+        if (!_isTouchingLeftWall && !_isTouchingRightWall)
+        {
+            _rb.velocity = new Vector2(moveX * _speed, _rb.velocity.y);
+        }
         if (moveX != 0 && moveX < 0)
         {
-
             animator.Play("Running");
             _sr.flipX = true;
         }
-        else if ((moveX != 0 && moveX > 0))
+        else if (moveX != 0 && moveX > 0)
         {
             animator.Play("Running");
             _sr.flipX = false;
@@ -58,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(_jumpKey) & _isGrounded)
+        if (Input.GetKeyDown(_jumpKey) && _isGrounded)
         { 
         _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
         }
@@ -66,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     private void CheckGround()
     {
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, overlapRadius, groundLayerMask);
-        Debug.Log($"_isGround: {_isGrounded}");
+        //Debug.Log($"_isGround: {_isGrounded}");
     }
 
 

@@ -6,8 +6,8 @@ public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private Transform _currPlatformPosition;
 
+    [SerializeField] private float _platformSpeed;
     private int _platformDirection = 1;
-
 
     private void FixedUpdate()
     {
@@ -26,7 +26,7 @@ public class MovingPlatform : MonoBehaviour
             _platformDirection = 1;
         }
     }
-    private void PlatformMove() => _currPlatformPosition.transform.position += new Vector3(0.1f * _platformDirection, 0, 0);
+    private void PlatformMove() => _currPlatformPosition.transform.position += new Vector3(_platformSpeed * _platformDirection, 0, 0);
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -38,7 +38,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.parent = null;
+            collision.transform.SetParent(null);
         }
     }
 }
